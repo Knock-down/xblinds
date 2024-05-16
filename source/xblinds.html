@@ -76,6 +76,22 @@ function save(divId){
   xhr.send();
 }
 
+<button onclick="saveSunrisePosition()">Save Sunrise Position</button>
+<button onclick="saveSunsetPosition()">Save Sunset Position</button>
+
+<script>
+    function saveSunrisePosition() {
+        fetch('/saveSunrisePosition')
+            .then(response => response.json())
+            .then(data => console.log(data));
+    }
+
+    function saveSunsetPosition() {
+        fetch('/saveSunsetPosition')
+            .then(response => response.json())
+            .then(data => console.log(data));
+    }
+	
 </script>
 <head>
 </head>
