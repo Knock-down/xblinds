@@ -26,8 +26,23 @@ const bool enableEEPROM = true;
 const int buttonPin = 15;                   // Physical D8 PIN on D1 mini
 size_t EEPROM_MEMORY_SIZE = 512;
 
+//Added to control position by sunset/sunrise
+int sunrisePosition = 0;
+int sunsetPosition = 0;
+unsigned long previousMillis = 0;
+const long interval = 1000; // Interval i millisekunder
+int currentStep = 0;
+const int totalSteps = 100; // Definer totalt antal trin fra position A til B
 
+void handleSaveSunrisePosition() {
+    sunrisePosition = getCurrentBlindPosition();
+    server.send(200, "application/json", "{\"status\":\"Sunrise position saved\"}");
+}
 
+void handleSaveSunsetPosition() {
+    sunsetPosition = getCurrentBlindPosition();
+    server.send(200, "application/json", "{\"status\":\"Sunset position saved\"}");
+}
 
 // EEPROM variables
 char xbidentifier[8] = "xBlinds";           // Pos 10, 10 bytes
